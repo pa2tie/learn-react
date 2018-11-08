@@ -1,37 +1,44 @@
 // class HelloWorldClass {
 //   render() {
-//     return <div>Hello World, I'm a class</div>;
+//     return <div>Hello World, I'm a {this.props.name}</div>;
 //   }
 // }
 
-// function HelloWorldFunction() {
-//   return <div>Hello World, I'm a function</div>;
+// function HelloWorldFunction(props) {
+//   return <div>Hello World, I'm a {props.name}</div>;
 // }
 
 // ReactDOM.render(
 //   <div>
-//     <HelloWorldFunction />
-//     <HelloWorldClass />
+//     <HelloWorldFunction name="Awesome Function" />
+//     <HelloWorldClass name="Awesome Class" />
 //   </div>,
 //   document.getElementById("root")
 // );
 
-class HelloWorldClass {
+class HelloWorldClass extends React.Component {
   render() {
-    return React.createElement("div", null, "Hello World, I'm a class");
+    return React.createElement(
+      "div",
+      null,
+      "Hello World, I'm a ",
+      this.props.name
+    );
   }
 }
 
-function HelloWorldFunction() {
-  return React.createElement("div", null, "Hello World, I'm a function");
-}
-
-ReactDOM.render(
-  React.createElement(
+function HelloWorldFunction(props) {
+  return React.createElement(
     "div",
     null,
-    React.createElement(HelloWorldFunction, null),
-    React.createElement(HelloWorldClass, null)
-  ),
-  document.getElementById("root")
-);
+    "Hello World, I'm a ",
+    props.name
+  );
+}
+
+ReactDOM.render(React.createElement(
+  "div",
+  null,
+  React.createElement(HelloWorldFunction, { name: "Awesome Function" }),
+  React.createElement(HelloWorldClass, { name: "Awesome Class" })
+), document.getElementById("root"));

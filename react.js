@@ -17,12 +17,12 @@ window.React = (function() {
 
   function createElement(element, props, ...children) {
     if (isClass(element)) {
-      const instance = new element();
+      const instance = new element(props);
       return instance.render();
     }
 
     if (isFunction(element)) {
-      return element();
+      return element(props);
     }
 
     if (isString(element)) {
@@ -31,7 +31,7 @@ window.React = (function() {
         if (isObject(child)) {
           domNode.appendChild(child);
         } else {
-          domNode.innerHTML = child;
+          domNode.innerHTML = domNode.innerHTML + child;
         }
       });
 
@@ -39,8 +39,15 @@ window.React = (function() {
     }
   }
 
+  class Component {
+    constructor(props) {
+      this.props = props;
+    }
+  }
+
   return {
-    createElement
+    createElement,
+    Component
   };
 })();
 
