@@ -27,6 +27,20 @@ window.React = (function() {
 
     if (isString(element)) {
       const domNode = document.createElement(element);
+
+      if (props) {
+        Object.keys(props).forEach(propName => {
+          if (/^on.*$/.test(propName)) {
+            domNode.addEventListener(
+              propName.substring(2).toLowerCase(),
+              props[propName]
+            );
+          } else {
+            domNode[propName] = props[propName];
+          }
+        });
+      }
+
       children.forEach(function(child) {
         if (isObject(child)) {
           domNode.appendChild(child);

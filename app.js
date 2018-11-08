@@ -5,7 +5,7 @@
 // }
 
 // function HelloWorldFunction(props) {
-//   return <div>Hello World, I'm a {props.name}</div>;
+//   return <div className="hello">Hello World, I'm a {props.name}</div>;
 // }
 
 // ReactDOM.render(
@@ -30,7 +30,7 @@ class HelloWorldClass extends React.Component {
 function HelloWorldFunction(props) {
   return React.createElement(
     "div",
-    null,
+    { className: "hello" },
     "Hello World, I'm a ",
     props.name
   );
