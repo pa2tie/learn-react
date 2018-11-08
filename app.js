@@ -1,9 +1,7 @@
-// function HelloWorld() {
-//   return (
-//     <div>
-//       Hello World
-//     </div>
-//   );
+// class HelloWorld {
+//   render() {
+//     return <div>Hello World</div>;
+//   }
 // }
 
 // ReactDOM.render(
@@ -11,11 +9,13 @@
 //   document.getElementById("root")
 // );
 
-function HelloWord() {
-  return React.createElement("div", null, "Hello World! I'm a function!");
+class HelloWorld {
+  render() {
+    return React.createElement("div", null, "Hello World, I'm class");
+  }
 }
 
 ReactDOM.render(
-  React.createElement(HelloWord),
+  React.createElement(HelloWorld),
   document.getElementById("root")
 );
