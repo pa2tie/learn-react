@@ -11,7 +11,11 @@ window.React = (function() {
     return typeof element === "string";
   }
 
-  function createElement(element, props, children) {
+  function isObject(element) {
+    return typeof element === "object";
+  }
+
+  function createElement(element, props, ...children) {
     if (isClass(element)) {
       const instance = new element();
       return instance.render();
@@ -23,7 +27,14 @@ window.React = (function() {
 
     if (isString(element)) {
       const domNode = document.createElement(element);
-      domNode.innerHTML = children;
+      children.forEach(function(child) {
+        if (isObject(child)) {
+          domNode.appendChild(child);
+        } else {
+          domNode.innerHTML = child;
+        }
+      });
+
       return domNode;
     }
   }
