@@ -1,44 +1,70 @@
-// class HelloWorldClass {
+// className AuthForm {
 //   render() {
-//     return <div>Hello World, I'm a {this.props.name}</div>;
+//     return (
+//       <section className="authorization">
+//         <div className="logo">
+//             <a href="#" className="logo"><img src="assets/img/w-mercury-development.svg" alt="mercury-logo"></a>
+//         </div>
+//         <div className="login">
+//             <div className="login-form-wrapper">
+//                 <h2 className="login-header">Log In</h2>
+//                 <form id="loginForm" className="login__form" method="post">
+//                     <input className="login__form-email" type="email" name="email" placeholder="E-Mail" />
+//                     <input className="login__form-password" type="password" name="password" placeholder="Password">
+//                     <button className="btn login-btn" type="submit">Login</button>
+//                 </form>
+//             </div>
+//         </div>
+//       </section>
+//     );
 //   }
 // }
 
-// function HelloWorldFunction(props) {
-//   return <div className="hello">Hello World, I'm a {props.name}</div>;
-// }
-
 // ReactDOM.render(
-//   <div>
-//     <HelloWorldFunction name="Awesome Function" />
-//     <HelloWorldClass name="Awesome Class" />
-//   </div>,
-//   document.getElementById("root")
+//   <AuthForm/>,
+//   document.getElementById("root");
 // );
 
-class HelloWorldClass extends React.Component {
+class AuthForm extends React.Component {
   render() {
     return React.createElement(
-      "div",
-      null,
-      "Hello World, I'm a ",
-      this.props.name
+      "section",
+      { "className": "authorization" },
+      React.createElement(
+        "div",
+        { "className": "logo" },
+        React.createElement(
+          "a",
+          { href: "#", "className": "logo" },
+          React.createElement("img", { src: "assets/img/w-mercury-development.svg", alt: "mercury-logo" })
+        )
+      ),
+      React.createElement(
+        "div",
+        { "className": "login" },
+        React.createElement(
+          "div",
+          { "className": "login-form-wrapper" },
+          React.createElement(
+            "h2",
+            { "className": "login-header" },
+            "Log In"
+          ),
+          React.createElement(
+            "form",
+            { id: "loginForm", "className": "login__form", method: "post" },
+            React.createElement("input", { "className": "login__form-email", type: "email", name: "email", placeholder: "E-Mail" }),
+            React.createElement("input", { "className": "login__form-password", type: "password", name: "password", placeholder: "Password" }),
+            React.createElement(
+              "button",
+              { "className": "btn login-btn", type: "submit" },
+              "Login"
+            )
+          )
+        )
+      )
     );
   }
 }
 
-function HelloWorldFunction(props) {
-  return React.createElement(
-    "div",
-    { className: "hello" },
-    "Hello World, I'm a ",
-    props.name
-  );
-}
-
-ReactDOM.render(React.createElement(
-  "div",
-  null,
-  React.createElement(HelloWorldFunction, { name: "Awesome Function" }),
-  React.createElement(HelloWorldClass, { name: "Awesome Class" })
-), document.getElementById("root"));
+ReactDOM.render(React.createElement(AuthForm, null), document.getElementById("root"));
