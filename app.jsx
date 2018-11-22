@@ -13,14 +13,66 @@ async function loginRequest(payload) {
   return await fetch(url, params);
 }
 
-class App extends React.Component {
+class MercuryProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <div className="profile">
+        <img
+          src={this.props.user.photoUrl}
+          alt="profile-img"
+          className="profile-img"
+        />
+        <span className="profile-name">{this.props.user.name}</span>
+        <button
+          className="btn logout-btn"
+          type="submit"
+          onClick={this.props.onLogout}
+        >
+          Logout
+        </button>
+      </div>
+    );
+  }
+}
+
+class ValidEmailInput extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <input
+        className={
+          this.props.valid
+            ? "login__form-email"
+            : "login__form-email error-input"
+        }
+        type="email"
+        name="email"
+        placeholder="E-Mail"
+        value={this.props.value}
+        onChange={this.props.onChange}
+        required
+      />
+    );
+  }
+}
+
+class MercuryLogin extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: "",
       password: "",
-      user: null,
       error: null,
       validEmail: true
     };
@@ -34,11 +86,9 @@ class App extends React.Component {
         password: this.state.password
       });
       const user = await loginResponse.json();
-      console.log(user);
+
       if (loginResponse.status == 200) {
-        this.setState({
-          user
-        });
+        this.props.handleSubmit(user);
       } else {
         switch (loginResponse.status) {
           case 400:
@@ -74,33 +124,38 @@ class App extends React.Component {
     });
   };
 
-  logout = () => {
-    this.setState({
-      user: null,
-      error: null,
-      email: "",
-      password: ""
-    });
-  };
-
   render() {
     return (
-      <section className="mercury">
-        <MercuryLogo />
-        {this.state.user ? (
-          <MercuryProfile user={this.state.user} onSubmit={this.logout} />
-        ) : (
-          <MercuryLogin
-            validEmail={this.state.validEmail}
-            error={this.state.error}
-            email={this.state.email}
-            password={this.state.password}
-            updateEmail={this.handleChangeEmail}
-            updatePassword={this.handleChangePassword}
-            handleSubmit={this.handleSubmit}
+      <div className="mercury__login login">
+        <h2 className="login__header">Log In</h2>
+        <form
+          id="loginForm"
+          className="login__form"
+          method="post"
+          onSubmit={this.handleSubmit}
+        >
+          <ValidEmailInput
+            valid={this.state.validEmail}
+            value={this.state.email}
+            onChange={this.handleChangeEmail}
           />
-        )}
-      </section>
+          <input
+            className="login__form-password"
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleChangePassword}
+            required
+          />
+          {this.state.error && (
+            <p className="error-msg">{this.state.error.error}</p>
+          )}
+          <button className="btn login__form-btn" type="submit">
+            Login
+          </button>
+        </form>
+      </div>
     );
   }
 }
@@ -115,98 +170,37 @@ const MercuryLogo = () => {
   );
 };
 
-class MercuryLogin extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      user: null
+    };
   }
+
+  handleSubmit = user => {
+    this.setState({
+      user
+    });
+  };
+
+  logout = () => {
+    this.setState({
+      user: null
+    });
+  };
 
   render() {
     return (
-      <div className="mercury__login login">
-        <h2 className="login__header">Log In</h2>
-        <form
-          id="loginForm"
-          className="login__form"
-          method="post"
-          onSubmit={this.props.handleSubmit}
-        >
-          <ValidEmailInput
-            valid={this.props.validEmail}
-            value={this.props.email}
-            onChange={this.props.updateEmail}
-          />
-          <input
-            className="login__form-password"
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={this.props.password}
-            onChange={this.props.updatePassword}
-            required
-          />
-          {this.props.error && (
-            <p className="error-msg">{this.props.error.error}</p>
-          )}
-          <button className="btn login__form-btn" type="submit">
-            Login
-          </button>
-        </form>
-      </div>
-    );
-  }
-}
-
-class ValidEmailInput extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <input
-        className={
-          this.props.valid
-            ? "login__form-email"
-            : "login__form-email error-input"
-        }
-        type="email"
-        name="email"
-        placeholder="E-Mail"
-        value={this.props.value}
-        onChange={this.props.onChange}
-        required
-      />
-    );
-  }
-}
-
-class MercuryProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <div className="profile">
-        <img
-          src={this.props.user.photoUrl}
-          alt="profile-img"
-          className="profile-img"
-        />
-        <span className="profile-name">{this.props.user.name}</span>
-        <button
-          className="btn logout-btn"
-          type="submit"
-          onClick={this.props.onSubmit}
-        >
-          Logout
-        </button>
-      </div>
+      <section className="mercury">
+        <MercuryLogo />
+        {this.state.user ? (
+          <MercuryProfile user={this.state.user} onLogout={this.logout} />
+        ) : (
+          <MercuryLogin handleSubmit={this.handleSubmit} />
+        )}
+      </section>
     );
   }
 }
