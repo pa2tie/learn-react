@@ -10,7 +10,27 @@ async function loginRequest(payload) {
     body: data,
     method: "POST"
   };
-  return await fetch(url, params);
+  let response = await fetch(url, params);
+
+  if (response.status == 200) {
+    return response;
+  } else {
+    return Promise.reject(response);
+  }
+}
+
+class Panel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return React.createElement("div", {
+      className: "panel" + (this.props.className ? " " + this.props.className : "")
+    }, this.props.children);
+  }
+
 }
 
 class MercuryProfile extends React.Component {
@@ -20,7 +40,7 @@ class MercuryProfile extends React.Component {
   }
 
   render() {
-    return React.createElement("div", {
+    return React.createElement(Panel, {
       className: "profile"
     }, React.createElement("img", {
       src: this.props.user.photoUrl,
@@ -37,7 +57,7 @@ class MercuryProfile extends React.Component {
 
 }
 
-class ValidEmailInput extends React.Component {
+class ValidInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -45,10 +65,10 @@ class ValidEmailInput extends React.Component {
 
   render() {
     return React.createElement("input", {
-      className: this.props.valid ? "login__form-email" : "login__form-email error-input",
-      type: "email",
-      name: "email",
-      placeholder: "E-Mail",
+      className: this.props.valid ? this.props.className : this.props.className + " error-input",
+      type: this.props.type,
+      name: this.props.name,
+      placeholder: this.props.placeholder,
       value: this.props.value,
       onChange: this.props.onChange,
       required: true
@@ -70,29 +90,24 @@ class MercuryLogin extends React.Component {
           password: this.state.password
         });
         const user = await loginResponse.json();
+        this.props.handleSubmit(user);
+      } catch (response) {
+        const error = await response.json();
 
-        if (loginResponse.status == 200) {
-          this.props.handleSubmit(user);
-        } else {
-          switch (loginResponse.status) {
-            case 400:
-              this.setState({
-                error: user,
-                validEmail: false
-              });
-              break;
+        switch (response.status) {
+          case 400:
+            this.setState({
+              error,
+              validEmail: false
+            });
+            break;
 
-            default:
-              this.setState({
-                error: user
-              });
-              break;
-          }
+          default:
+            this.setState({
+              error
+            });
+            break;
         }
-      } catch (e) {
-        this.setState({
-          error: "Something went wrong"
-        });
       }
     });
 
@@ -118,7 +133,7 @@ class MercuryLogin extends React.Component {
   }
 
   render() {
-    return React.createElement("div", {
+    return React.createElement(Panel, {
       className: "mercury__login login"
     }, React.createElement("h2", {
       className: "login__header"
@@ -127,10 +142,13 @@ class MercuryLogin extends React.Component {
       className: "login__form",
       method: "post",
       onSubmit: this.handleSubmit
-    }, React.createElement(ValidEmailInput, {
+    }, React.createElement(ValidInput, {
       valid: this.state.validEmail,
       value: this.state.email,
-      onChange: this.handleChangeEmail
+      onChange: this.handleChangeEmail,
+      placeholder: "E-Mail",
+      className: "login__form-email",
+      type: "email"
     }), React.createElement("input", {
       className: "login__form-password",
       type: "password",
