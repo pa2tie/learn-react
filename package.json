@@ -3,16 +3,23 @@
   "version": "1.0.0",
   "description": "* Fork repo \r * Clone forked repo\r ```\r git clone https://github.com/<username>/learn-react.git\r ```\r * Open `index.html` in a browser",
   "main": "app.js",
-  "dependencies": {},
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
+    "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-arrow-functions": "^7.0.0",
-    "@babel/plugin-transform-react-jsx": "^7.1.6"
+    "@babel/plugin-transform-react-jsx": "^7.1.6",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",

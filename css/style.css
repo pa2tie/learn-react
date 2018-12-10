@@ -66,7 +66,7 @@ body {
   margin: 0 0 10vh 0;
 }
 
-.login input {
+.mercury-input {
   color: black;
   border: none;
   background-color: #f1f1f1;
@@ -86,7 +86,7 @@ body {
   color: #262626;
 }
 
-.login input:focus {
+.mercury-input:focus {
   outline: none;
   box-shadow: 0 0 0 1px rgba(151, 151, 151, 0.25);
 }
