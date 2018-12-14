@@ -50,8 +50,13 @@ body {
   text-align: center;
 }
 
-.logo img {
-  max-width: 315px;
+.logo-img {
+  display: inline-block;
+  height: 69px;
+  background: url("../assets/img/w-mercury-development.svg") no-repeat center
+    center;
+  background-size: contain;
+  /* max-width: 315px; */
   width: 100%;
 }
 

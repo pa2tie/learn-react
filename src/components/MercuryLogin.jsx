@@ -1,27 +1,7 @@
 import MercuryInput from "./MercuryInput";
 import Panel from "./Panel";
-
-async function loginRequest(payload) {
-  const url = "https://us-central1-mercdev-academy.cloudfunctions.net/login";
-  let data = JSON.stringify(payload);
-
-  let params = {
-    headers: {
-      "Content-Type": "application/json; charset=utf-8"
-    },
-    body: data,
-    method: "POST"
-  };
-
-  let response = await fetch(url, params);
-  let json = await response.json();
-  if (response.status == 200) {
-    return json;
-  } else {
-    json.status = response.status;
-    return Promise.reject(json);
-  }
-}
+import styles from "../css/style.css";
+import { loginRequest } from "../services/HttpService";
 
 class MercuryLogin extends React.Component {
   constructor(props) {
@@ -75,10 +55,10 @@ class MercuryLogin extends React.Component {
 
   render() {
     return (
-      <Panel className="mercury__login login">
-        <h2 className="login__header">Log In</h2>
+      <Panel className={styles["mercury__login"] + " " + styles["login"]}>
+        <h2 className={styles["login__header"]}>Log In</h2>
         <form
-          className="login__form"
+          className={styles["login__form"]}
           method="post"
           onSubmit={this.handleSubmit}
         >
@@ -87,19 +67,24 @@ class MercuryLogin extends React.Component {
             value={this.state.email}
             onChange={this.handleChangeEmail}
             placeholder="E-Mail"
-            className="login__form-email"
+            className={styles["login__form-email"]}
             type="email"
           />
           <MercuryInput
-            className="login__form-password"
+            className={styles["login__form-password"]}
             type="password"
             name="password"
             placeholder="Password"
             value={this.state.password}
             onChange={this.handleChangePassword}
           />
-          {this.state.error && <p className="error-msg">{this.state.error}</p>}
-          <button className="btn login__form-btn" type="submit">
+          {this.state.error && (
+            <p className={styles["error-msg"]}>{this.state.error}</p>
+          )}
+          <button
+            className={styles.btn + " " + styles["login__form-btn"]}
+            type="submit"
+          >
             Login
           </button>
         </form>

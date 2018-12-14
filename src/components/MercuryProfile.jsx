@@ -1,5 +1,6 @@
 import Panel from "./Panel";
-import { Consumer } from "./Context";
+import { Consumer } from "../store/Context";
+import styles from "../css/style.css";
 
 class MercuryProfile extends React.Component {
   constructor(props) {
@@ -11,15 +12,15 @@ class MercuryProfile extends React.Component {
     return (
       <Consumer>
         {user => (
-          <Panel className="profile">
+          <Panel className={styles["profile"]}>
             <img
               src={user.photoUrl}
               alt="profile-img"
-              className="profile-img"
+              className={styles["profile-img"]}
             />
-            <span className="profile-name">{user.name}</span>
+            <span className={styles["profile-name"]}>{user.name}</span>
             <button
-              className="btn logout-btn"
+              className={styles.btn + " " + styles["logout-btn"]}
               type="submit"
               onClick={this.props.onLogout}
             >

@@ -31,7 +31,9 @@ npm install
 npm run build
 ```
 
-- Open index.html in your browser
+```
+npm start
+```
 
 ## Run on device (smartphone or tablet)
 
@@ -46,7 +48,7 @@ npm install --global serve
 - Start serving static files:
 
 ```
-serve ./learn-react
+serve ./dist
 ```
 
 - Open displayed address on your device (e.g. http://192.168.0.151:5000)

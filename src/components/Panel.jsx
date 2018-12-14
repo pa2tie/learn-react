@@ -1,3 +1,5 @@
+import styles from "../css/style.css";
+
 class Panel extends React.Component {
   constructor(props) {
     super(props);
@@ -8,7 +10,8 @@ class Panel extends React.Component {
     return (
       <div
         className={
-          "panel" + (this.props.className ? " " + this.props.className : "")
+          styles["panel"] +
+          (this.props.className ? " " + this.props.className : "")
         }
       >
         {this.props.children}
