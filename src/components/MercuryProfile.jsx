@@ -1,3 +1,4 @@
+import React from "react";
 import Panel from "./Panel";
 import { Consumer } from "../store/Context";
 import styles from "../css/style.css";

@@ -1,3 +1,4 @@
+import React from "react";
 import MercuryInput from "./MercuryInput";
 import Panel from "./Panel";
 import styles from "../css/style.css";

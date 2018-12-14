@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "../css/style.css";
 
 const MercuryLogo = props => {
