@@ -1,7 +1,7 @@
 import React from "react";
 import Panel from "./Panel";
-import { Consumer } from "../store/Context";
-import styles from "../css/style.css";
+import { Consumer } from "../../store/Context";
+import styles from "./MercuryProfile.css";
 
 class MercuryProfile extends React.Component {
   constructor(props) {

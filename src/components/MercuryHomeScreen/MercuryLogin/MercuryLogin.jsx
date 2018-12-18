@@ -2,7 +2,7 @@ import React from "react";
 import MercuryInput from "./MercuryInput";
 import Panel from "./Panel";
 import styles from "../css/style.css";
-import { loginRequest } from "../services/HttpService";
+import { loginRequest } from "../../services/HttpService";
 
 class MercuryLogin extends React.Component {
   constructor(props) {

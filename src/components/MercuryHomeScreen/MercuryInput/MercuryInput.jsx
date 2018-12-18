@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../css/style.css";
+import styles from "./MercuryInput.css";
 
 class MercuryInput extends React.Component {
   constructor(props) {
