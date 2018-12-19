@@ -1,1 +1,9 @@
-/* styles */
+.mercury {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-left: auto;
+    margin-right: auto;
+  }
