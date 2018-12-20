@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../css/style.css";
+import styles from "./MercuryLogo.css";
 
 const MercuryLogo = props => {
   return (
