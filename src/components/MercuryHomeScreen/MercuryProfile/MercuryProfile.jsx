@@ -1,6 +1,7 @@
 import React from "react";
-import Panel from "./Panel";
-import { Consumer } from "../../store/Context";
+import Panel from "../Panel/Panel";
+import MercuryButton from "../MercuryButton/MercuryButton";
+import { Consumer } from "../../../store/Context";
 import styles from "./MercuryProfile.css";
 
 class MercuryProfile extends React.Component {
@@ -12,21 +13,21 @@ class MercuryProfile extends React.Component {
   render() {
     return (
       <Consumer>
-        {user => (
+        {context => (
           <Panel className={styles["profile"]}>
             <img
-              src={user.photoUrl}
+              src={context.user.photoUrl}
               alt="profile-img"
               className={styles["profile-img"]}
             />
-            <span className={styles["profile-name"]}>{user.name}</span>
-            <button
-              className={styles.btn + " " + styles["logout-btn"]}
+            <span className={styles["profile-name"]}>{context.user.name}</span>
+            <MercuryButton
+              className={styles["logout-btn"]}
               type="submit"
-              onClick={this.props.onLogout}
+              onClick={context.onLogout}
             >
               Logout
-            </button>
+            </MercuryButton>
           </Panel>
         )}
       </Consumer>

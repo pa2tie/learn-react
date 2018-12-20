@@ -1,5 +1,4 @@
-async function loginRequest(payload) {
-  const url = "https://us-central1-mercdev-academy.cloudfunctions.net/login";
+async function postRequest({ url, payload }) {
   let data = JSON.stringify(payload);
 
   let params = {
@@ -20,4 +19,4 @@ async function loginRequest(payload) {
   }
 }
 
-export { loginRequest };
+export { postRequest };

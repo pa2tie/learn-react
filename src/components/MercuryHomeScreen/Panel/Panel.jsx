@@ -1,21 +1,13 @@
 import React from "react";
+import classNames from "classnames";
 import styles from "./Panel.css";
 
 class Panel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
+    const { className, children, ...otherProps } = this.props;
     return (
-      <div
-        className={
-          styles["panel"] +
-          (this.props.className ? " " + this.props.className : "")
-        }
-      >
-        {this.props.children}
+      <div className={classNames(styles["panel"], className)} {...otherProps}>
+        {children}
       </div>
     );
   }

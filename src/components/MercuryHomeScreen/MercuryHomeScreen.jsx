@@ -5,7 +5,12 @@ import MercuryLogin from "./MercuryLogin/MercuryLogin";
 import MercuryProfile from "./MercuryProfile/MercuryProfile";
 import { Provider } from "../../store/Context";
 import styles from "./MercuryHomeScreen.css";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 class MercuryHomeScreen extends React.Component {
   constructor(props) {
@@ -14,47 +19,44 @@ class MercuryHomeScreen extends React.Component {
     this.state = {
       user: null
     };
-
-    this.props.history.push("/login");
   }
 
   handleSubmit = user => {
     this.setState({
       user
     });
-    this.props.history.push("/profile");
   };
 
   logout = () => {
     this.setState({
       user: null
     });
-    this.props.history.push("/login");
   };
 
   render() {
     return (
-      <section className={styles["mercury"]}>
-        <MercuryLogo href="#/login" />
-        <Switch>
-          <Provider value={this.state.user}>
-            {this.state.user && (
-              <Route
-                exact
-                path="/profile"
-                render={props => <MercuryProfile onLogout={this.logout} />}
-              />
-            )}
-            <Route
-              exact
-              path="/login"
-              render={props => (
-                <MercuryLogin handleSubmit={this.handleSubmit} />
-              )}
-            />
-          </Provider>
-        </Switch>
-      </section>
+      <Provider
+        value={{
+          user: this.state.user,
+          onLogout: this.logout,
+          handleSubmit: this.handleSubmit
+        }}
+      >
+        <section className={styles["mercury"]}>
+          <MercuryLogo href="#/login" />
+          {this.state.user ? (
+            <Switch>
+              <Route exact path="/profile" component={MercuryProfile} />
+              <Redirect to="/profile" />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route exact path="/login" component={MercuryLogin} />
+              <Redirect to="/login" />
+            </Switch>
+          )}
+        </section>
+      </Provider>
     );
   }
 }

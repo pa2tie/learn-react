@@ -1,29 +1,18 @@
 import React from "react";
+import classNames from "classnames";
 import styles from "./MercuryInput.css";
 
 class MercuryInput extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const { className, valid = true, ...otherProps } = this.props;
     return (
       <input
-        className={
-          this.props.valid || this.props.valid === undefined
-            ? this.props.className + " " + styles["mercury-input"]
-            : this.props.className +
-              " " +
-              styles["mercury-input"] +
-              " " +
-              styles["error-input"]
-        }
-        type={this.props.type}
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        value={this.props.value}
-        onChange={this.props.onChange}
+        className={classNames(styles["mercury-input"], {
+          className,
+          [styles["error-input"]]: !valid
+        })}
         required
+        {...otherProps}
       />
     );
   }

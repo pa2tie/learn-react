@@ -12,8 +12,7 @@
 .logo-img {
   display: inline-block;
   height: 69px;
-  background: url("../assets/img/w-mercury-development.svg") no-repeat center
-    center;
+  background: url("./assets/w-mercury-development.svg") no-repeat center center;
   background-size: contain;
   width: 100%;
 }
