@@ -1,7 +1,5 @@
 import React from "react";
-import classNames from "classnames";
-import styles from "./MercuryInput.css";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Input = styled.input`
   color: black;
@@ -38,7 +36,9 @@ const Input = styled.input`
 class MercuryInput extends React.Component {
   render() {
     const { className, valid = true, ...otherProps } = this.props;
-    return <Input className={className} valid required {...otherProps} />;
+    return (
+      <Input className={className} valid={valid} required {...otherProps} />
+    );
   }
 }
 

@@ -1,6 +1,4 @@
 import React from "react";
-import classNames from "classnames";
-import styles from "./Panel.css";
 import styled from "styled-components";
 
 const PanelStyled = styled.div`

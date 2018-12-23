@@ -2,9 +2,53 @@ import React from "react";
 import MercuryInput from "../MercuryInput/MercuryInput";
 import Panel from "../Panel/Panel";
 import MercuryButton from "../MercuryButton/MercuryButton";
-import styles from "./MercuryLogin.css";
 import { postRequest } from "../../../services/HttpService";
 import { Consumer } from "../../../store/Context";
+import styled from "styled-components";
+
+const LoginHeader = styled.h2`
+  margin-top: 0;
+  margin-bottom: 32px;
+  opacity: 0.8;
+  font-family: Gotham;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+  text-align: center;
+  color: #262626;
+`;
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledMercuryButton = styled(MercuryButton)`
+  margin: 16px 0;
+`;
+
+const ErrorMessage = styled.p`
+  width: 100%;
+  border-radius: 4px;
+  background-color: rgba(237, 65, 89, 0.25);
+  padding: 11px 16px;
+  margin-top: 0;
+  margin-bottom: 24px;
+
+  font-family: Gotham;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ed4159;
+`;
 
 class MercuryLogin extends React.Component {
   constructor(props) {
@@ -63,10 +107,9 @@ class MercuryLogin extends React.Component {
     return (
       <Consumer>
         {context => (
-          <Panel className={styles["mercury__login"] + " " + styles["login"]}>
-            <h2 className={styles["login__header"]}>Log In</h2>
-            <form
-              className={styles["login__form"]}
+          <Panel>
+            <LoginHeader>Log In</LoginHeader>
+            <LoginForm
               method="post"
               onSubmit={e => this.handleSubmit(e, context.handleSubmit)}
             >
@@ -75,11 +118,9 @@ class MercuryLogin extends React.Component {
                 value={this.state.email}
                 onChange={this.handleChangeEmail}
                 placeholder="E-Mail"
-                className={styles["login__form-email"]}
                 type="email"
               />
               <MercuryInput
-                className={styles["login__form-password"]}
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -87,15 +128,10 @@ class MercuryLogin extends React.Component {
                 onChange={this.handleChangePassword}
               />
               {this.state.error && (
-                <p className={styles["error-msg"]}>{this.state.error}</p>
+                <ErrorMessage>{this.state.error}</ErrorMessage>
               )}
-              <MercuryButton
-                className={styles["login__form-btn"]}
-                type="submit"
-              >
-                Login
-              </MercuryButton>
-            </form>
+              <StyledMercuryButton type="submit">Login</StyledMercuryButton>
+            </LoginForm>
           </Panel>
         )}
       </Consumer>
