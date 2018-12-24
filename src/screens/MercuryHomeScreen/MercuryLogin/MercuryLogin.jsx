@@ -1,7 +1,7 @@
 import React from "react";
-import MercuryInput from "../MercuryInput/MercuryInput";
-import Panel from "../Panel/Panel";
-import MercuryButton from "../MercuryButton/MercuryButton";
+import MercuryInput from "../../../components/MercuryInput/MercuryInput";
+import Panel from "../../../components/Panel/Panel";
+import MercuryButton from "../../../components/MercuryButton/MercuryButton";
 import { postRequest } from "../../../services/HttpService";
 import { Consumer } from "../../../store/Context";
 import styled from "styled-components";

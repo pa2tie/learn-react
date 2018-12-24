@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import MercuryLogo from "./MercuryLogo/MercuryLogo";
+import MercuryLogo from "../../components/MercuryLogo/MercuryLogo";
 import MercuryLogin from "./MercuryLogin/MercuryLogin";
 import MercuryProfile from "./MercuryProfile/MercuryProfile";
 import { Provider } from "../../store/Context";

@@ -1,6 +1,6 @@
 import React from "react";
-import Panel from "../Panel/Panel";
-import MercuryButton from "../MercuryButton/MercuryButton";
+import Panel from "../../../components/Panel/Panel";
+import MercuryButton from "../../../components/MercuryButton/MercuryButton";
 import { Consumer } from "../../../store/Context";
 import styled from "styled-components";
 
